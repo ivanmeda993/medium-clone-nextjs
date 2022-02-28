@@ -22,10 +22,10 @@ function Post({ post }: Props) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm()
+  } = useForm<IFormInput>()
 
   console.log(post)
-  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+  const onSubmit: SubmitHandler<IFormInput> = async (data: any) => {
     await fetch('/api/createComment', {
       method: 'POST',
       body: JSON.stringify(data),
@@ -98,7 +98,7 @@ function Post({ post }: Props) {
       </article>
       <hr className="my-5 mx-auto max-w-lg border-yellow-500" />
       {submited ? (
-        <div className="flex flex-col py-10 my-10 bg-yellow-500 text-white max-w-2xl mx-auto p-5">
+        <div className="my-10 mx-auto flex max-w-2xl flex-col bg-yellow-500 p-5 py-10 text-white">
           <h3 className="text-3xl font-bold">
             Thank you for submitting your comment!
           </h3>
@@ -158,12 +158,12 @@ function Post({ post }: Props) {
           </div>
           <input
             type="submit"
-            className="bg-yellow-500 hover:bg-yellow-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded cursor:default"
+            className="focus:shadow-outline cursor:default rounded bg-yellow-500 py-2 px-4 font-bold text-white hover:bg-yellow-400 focus:outline-none"
           />
         </form>
       )}
 
-      <div className="flex flex-col p-10 my-10 max-w-2xl mx-auto shadow-yellow-500 shadow space-y-2">
+      <div className="my-10 mx-auto flex max-w-2xl flex-col space-y-2 p-10 shadow shadow-yellow-500">
         <h3 className="text-4xl">Comments</h3>
         <hr className="pb-2" />
         {post.comments.map((comment) => (
